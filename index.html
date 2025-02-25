@@ -3,291 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RelationalAI Value Calculator</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            background-color: #2563eb;
-            color: white;
-            padding: 20px 0;
-            margin-bottom: 30px;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .card-header {
-            background-color: #2563eb;
-            color: white;
-            padding: 12px 20px;
-        }
-        
-        .card-header h2 {
-            margin: 0;
-            font-size: 18px;
-        }
-        
-        .card-body {
-            padding: 20px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        .help-text {
-            font-size: 12px;
-            color: #666;
-            margin-top: 4px;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .button-row {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        
-        .btn-primary {
-            background-color: #2563eb;
-            color: white;
-        }
-        
-        .btn-secondary {
-            background-color: white;
-            color: #2563eb;
-            border: 1px solid #2563eb;
-        }
-        
-        #resultsContainer {
-            display: none;
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .value-card {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 15px;
-        }
-        
-        .value-card h3 {
-            margin-top: 0;
-            color: #2563eb;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        
-        .metric {
-            margin-bottom: 8px;
-        }
-        
-        .metric-value {
-            font-weight: 600;
-        }
-        
-        .summary-box {
-            background-color: #dbeafe;
-            border-left: 4px solid #2563eb;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .value-highlight {
-            font-size: 22px;
-            font-weight: bold;
-            color: #16a34a;
-        }
-    </style>
+    <title>RelationalAI Business Value Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="container">
             <div class="header-content">
-                <h1>RelationalAI Business Value Calculator</h1>
-                <div>RelationalAI</div>
+                <div>
+                    <h1>Business Value Calculator</h1>
+                    <div class="header-subtitle">Quantify the impact of RelationalAI for your organization</div>
+                </div>
+                <div class="logo">
+                    <div class="logo-mark">R</div> RelationalAI
+                </div>
             </div>
         </div>
     </header>
 
     <div class="container">
+        <!-- Progress Steps -->
+        <div class="steps-container">
+            <div class="step active" id="step1">
+                <div class="step-circle">1</div>
+                <div class="step-text">Organization Details</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-circle">2</div>
+                <div class="step-text">Data Environment</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-circle">3</div>
+                <div class="step-text">Value Drivers</div>
+            </div>
+        </div>
+        
         <!-- Input Form -->
         <div id="inputForm">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Customer Information</h2>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="companyName">Company Name</label>
-                        <input type="text" id="companyName" placeholder="Enter prospect company name">
+            <!-- Step 1: Organization Details -->
+            <div id="step1Content" class="step-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-building card-header-icon"></i>
+                        <h2>Organization Details</h2>
                     </div>
-                    <div class="form-row">
+                    <div class="card-body">
                         <div class="form-group">
-                            <label for="industry">Industry</label>
-                            <select id="industry">
-                                <option value="">Select an industry</option>
-                                <option value="financial">Financial Services</option>
-                                <option value="healthcare">Healthcare</option>
-                                <option value="retail">Retail</option>
-                                <option value="manufacturing">Manufacturing</option>
-                                <option value="technology">Technology</option>
+                            <label for="companyName">Organization Name</label>
+                            <input type="text" id="companyName" placeholder="Enter organization name">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="industry">Industry</label>
+                                <select id="industry">
+                                    <option value="">Select an industry</option>
+                                    <option value="financial">Financial Services</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="retail">Retail</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="companySize">Organization Size</label>
+                                <select id="companySize">
+                                    <option value="">Select organization size</option>
+                                    <option value="small">Small (< 100 employees)</option>
+                                    <option value="medium">Medium (100-1000 employees)</option>
+                                    <option value="large">Large (1000-5000 employees)</option>
+                                    <option value="enterprise">Enterprise (5000+ employees)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="annualRevenue">Annual Revenue ($ millions)</label>
+                            <input type="number" id="annualRevenue" placeholder="Enter annual revenue" min="0">
+                        </div>
+                        
+                        <div class="button-row">
+                            <button id="step1NextBtn" class="btn-primary">
+                                <span>Continue</span>
+                                <i class="fas fa-arrow-right btn-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Data Environment -->
+            <div id="step2Content" class="step-content">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-database card-header-icon"></i>
+                        <h2>Current Data Environment</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="currentDataSolution">
+                                Current Data Platform
+                                <span class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Select your primary data warehouse or analytics platform</span>
+                                </span>
+                            </label>
+                            <select id="currentDataSolution">
+                                <option value="">Select current solution</option>
+                                <option value="snowflake">Snowflake</option>
+                                <option value="aws">AWS (Redshift, etc.)</option>
+                                <option value="azure">Azure (Synapse, etc.)</option>
+                                <option value="gcp">Google Cloud (BigQuery, etc.)</option>
+                                <option value="traditional">Traditional Data Warehouse</option>
+                                <option value="none">No dedicated solution</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dataVolume">
+                                    Approximate Data Volume (TB)
+                                    <span class="tooltip">
+                                        <span class="tooltip-icon">?</span>
+                                        <span class="tooltip-text">Total volume of data being stored and analyzed</span>
+                                    </span>
+                                </label>
+                                <input type="number" id="dataVolume" placeholder="Enter data volume" min="0">
+                                <span class="help-text">Estimate the total data volume being processed</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="dataTeamSize">
+                                    Data Team Size (FTEs)
+                                    <span class="tooltip">
+                                        <span class="tooltip-icon">?</span>
+                                        <span class="tooltip-text">Number of data engineers, scientists, and analysts</span>
+                                    </span>
+                                </label>
+                                <input type="number" id="dataTeamSize" placeholder="Number of data professionals" min="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataQualityIssues">
+                                Current Data Quality Issues (%)
+                                <span class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Percentage of data with quality or consistency issues</span>
+                                </span>
+                            </label>
+                            <input type="number" id="dataQualityIssues" placeholder="Estimated % of data with quality issues" min="0" max="100">
+                            <span class="help-text">Estimate what percentage of decisions are impacted by data quality issues</span>
+                        </div>
+                        
+                        <div class="button-row">
+                            <button id="step2BackBtn" class="btn-secondary">
+                                <i class="fas fa-arrow-left btn-icon"></i>
+                                <span>Back</span>
+                            </button>
+                            <button id="step2NextBtn" class="btn-primary">
+                                <span>Continue</span>
+                                <i class="fas fa-arrow-right btn-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Business Value Drivers -->
+            <div id="step3Content" class="step-content">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line card-header-icon"></i>
+                        <h2>Business Value Drivers</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="useCase">
+                                Primary Use Case
+                                <span class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">The main business problem you're trying to solve</span>
+                                </span>
+                            </label>
+                            <select id="useCase">
+                                <option value="">Select primary use case</option>
+                                <option value="customerInsight">Customer Insights & Personalization</option>
+                                <option value="fraudDetection">Fraud Detection & Prevention</option>
+                                <option value="supplyChain">Supply Chain Optimization</option>
+                                <option value="riskAnalysis">Risk Analysis</option>
+                                <option value="productDevelopment">Accelerated Product Development</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="companySize">Company Size</label>
-                            <select id="companySize">
-                                <option value="">Select company size</option>
-                                <option value="small">Small (< 100 employees)</option>
-                                <option value="medium">Medium (100-1000 employees)</option>
-                                <option value="large">Large (1000-5000 employees)</option>
-                                <option value="enterprise">Enterprise (5000+ employees)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2>Current Data Environment</h2>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="currentDataSolution">Current Data Solution</label>
-                        <select id="currentDataSolution">
-                            <option value="">Select current solution</option>
-                            <option value="snowflake">Snowflake</option>
-                            <option value="aws">AWS (Redshift, etc.)</option>
-                            <option value="azure">Azure (Synapse, etc.)</option>
-                            <option value="gcp">Google Cloud (BigQuery, etc.)</option>
-                            <option value="traditional">Traditional Data Warehouse</option>
-                            <option value="none">No dedicated solution</option>
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dataVolume">Approximate Data Volume (TB)</label>
-                            <input type="number" id="dataVolume" placeholder="Enter data volume in TB" min="0">
-                            <div class="help-text">Estimate the total data volume they're processing</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="dataTeamSize">Data Team Size (FTEs)</label>
-                            <input type="number" id="dataTeamSize" placeholder="Number of data engineers, scientists, etc." min="0">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2>Business Value Drivers</h2>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="useCase">Primary Use Case</label>
-                        <select id="useCase">
-                            <option value="">Select primary use case</option>
-                            <option value="customerInsight">Customer Insights & Personalization</option>
-                            <option value="fraudDetection">Fraud Detection & Prevention</option>
-                            <option value="supplyChain">Supply Chain Optimization</option>
-                            <option value="riskAnalysis">Risk Analysis</option>
-                            <option value="productDevelopment">Accelerated Product Development</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="devTime">Current Development Time (weeks)</label>
+                            <label for="devTime">
+                                Current Development Time (weeks)
+                                <span class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Average time to implement new data models</span>
+                                </span>
+                            </label>
                             <input type="number" id="devTime" placeholder="Weeks to implement new models" min="0">
-                            <div class="help-text">How long it currently takes to deploy new data models</div>
+                            <span class="help-text">How long it currently takes to deploy new data models</span>
                         </div>
-                        <div class="form-group">
-                            <label for="annualRevenue">Annual Revenue ($ millions)</label>
-                            <input type="number" id="annualRevenue" placeholder="Company's annual revenue" min="0">
+                        
+                        <div class="button-row">
+                            <button id="step3BackBtn" class="btn-secondary">
+                                <i class="fas fa-arrow-left btn-icon"></i>
+                                <span>Back</span>
+                            </button>
+                            <button id="calculateBtn" class="btn-primary">
+                                <i class="fas fa-calculator btn-icon"></i>
+                                <span>Calculate Business Value</span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dataQualityIssues">Current Data Quality Issues (%)</label>
-                        <input type="number" id="dataQualityIssues" placeholder="Estimated % of data with quality issues" min="0" max="100">
-                        <div class="help-text">Estimate what percentage of decisions are impacted by data quality issues</div>
                     </div>
                 </div>
-            </div>
-
-            <div class="button-row">
-                <button id="resetBtn" class="btn-secondary">Reset</button>
-                <button id="calculateBtn" class="btn-primary">Calculate Business Value</button>
             </div>
         </div>
 
@@ -295,307 +227,208 @@
         <div id="resultsContainer">
             <div class="card">
                 <div class="card-header">
-                    <h2>Business Value Summary for <span id="companyNameDisplay"></span></h2>
+                    <i class="fas fa-chart-pie card-header-icon"></i>
+                    <h2>Business Value Analysis for <span id="companyNameDisplay"></span></h2>
                 </div>
                 <div class="card-body">
-                    <div class="summary-box">
-                        <p><strong>Total 3-Year Value Potential: <span id="totalValueDisplay" class="value-highlight"></span></strong></p>
-                        <p id="summaryText">RelationalAI can deliver significant business value across multiple dimensions.</p>
+                    <!-- Tabs -->
+                    <div class="tabs">
+                        <div class="tab active" data-tab="summary">Executive Summary</div>
+                        <div class="tab" data-tab="details">Financial Analysis</div>
+                        <div class="tab" data-tab="visualization">Data Visualization</div>
                     </div>
                     
-                    <div class="results-grid">
-                        <div class="value-card">
-                            <h3>Operational Efficiency</h3>
-                            <div class="metric">
-                                <div>Annual Cost Savings:</div>
-                                <div class="metric-value" id="costSavingsDisplay"></div>
+                    <!-- Executive Summary Tab -->
+                    <div id="summaryTab" class="tab-content active">
+                        <div class="summary-box">
+                            <p><strong>Total 3-Year Value Potential: <span id="totalValueDisplay" class="value-highlight"></span></strong></p>
+                            <p id="summaryText">RelationalAI can deliver significant business value across multiple dimensions.</p>
+                        </div>
+                        
+                        <div class="results-grid">
+                            <div class="value-card">
+                                <h3><i class="fas fa-bolt"></i> Operational Efficiency</h3>
+                                <div class="metric">
+                                    <div class="metric-label">Annual Cost Savings:</div>
+                                    <div class="metric-value" id="costSavingsDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Development Time Reduction:</div>
+                                    <div class="metric-value" id="devTimeReductionDisplay"></div>
+                                </div>
+                                <div class="value-card-footer">
+                                    Based on industry benchmarks for similar implementations.
+                                </div>
                             </div>
-                            <div class="metric">
-                                <div>Development Time Reduction:</div>
-                                <div class="metric-value" id="devTimeReductionDisplay"></div>
+                            
+                            <div class="value-card">
+                                <h3><i class="fas fa-chart-bar"></i> Revenue Impact</h3>
+                                <div class="metric">
+                                    <div class="metric-label">Potential Revenue Increase:</div>
+                                    <div class="metric-value" id="revenueIncreaseDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Time-to-Value Improvement:</div>
+                                    <div class="metric-value" id="timeToValueDisplay"></div>
+                                </div>
+                                <div class="value-card-footer">
+                                    Based on faster insights and improved decision making.
+                                </div>
+                            </div>
+                            
+                            <div class="value-card">
+                                <h3><i class="fas fa-shield-alt"></i> Risk Reduction</h3>
+                                <div class="metric">
+                                    <div class="metric-label">Data Quality Improvement:</div>
+                                    <div class="metric-value" id="dataQualityDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Estimated Risk Avoidance:</div>
+                                    <div class="metric-value" id="riskAvoidanceDisplay"></div>
+                                </div>
+                                <div class="value-card-footer">
+                                    Based on improved data governance and quality.
+                                </div>
+                            </div>
+                            
+                            <div class="value-card">
+                                <h3><i class="fas fa-rocket"></i> Strategic Value</h3>
+                                <div class="metric">
+                                    <div class="metric-label">Innovation Acceleration:</div>
+                                    <div class="metric-value" id="innovationDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Competitive Advantage:</div>
+                                    <div class="metric-value" id="competitiveDisplay"></div>
+                                </div>
+                                <div class="value-card-footer">
+                                    Based on faster implementation of AI/ML capabilities.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Financial Analysis Tab -->
+                    <div id="detailsTab" class="tab-content">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>ROI Analysis</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric">
+                                    <div class="metric-label">First Year ROI:</div>
+                                    <div class="metric-value" id="firstYearROIDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">3-Year ROI:</div>
+                                    <div class="metric-value" id="threeYearROIDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Estimated Payback Period:</div>
+                                    <div class="metric-value" id="paybackPeriodDisplay"></div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="value-card">
-                            <h3>Revenue Impact</h3>
-                            <div class="metric">
-                                <div>Potential Revenue Increase:</div>
-                                <div class="metric-value" id="revenueIncreaseDisplay"></div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Value Over Time</h3>
                             </div>
-                            <div class="metric">
-                                <div>Time-to-Value Improvement:</div>
-                                <div class="metric-value" id="timeToValueDisplay"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="value-card">
-                            <h3>Risk Reduction</h3>
-                            <div class="metric">
-                                <div>Data Quality Improvement:</div>
-                                <div class="metric-value" id="dataQualityDisplay"></div>
-                            </div>
-                            <div class="metric">
-                                <div>Estimated Risk Avoidance:</div>
-                                <div class="metric-value" id="riskAvoidanceDisplay"></div>
+                            <div class="card-body">
+                                <div class="metric">
+                                    <div class="metric-label">Year 1 Value:</div>
+                                    <div class="metric-value" id="year1ValueDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Year 2 Value:</div>
+                                    <div class="metric-value" id="year2ValueDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Year 3 Value:</div>
+                                    <div class="metric-value" id="year3ValueDisplay"></div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="value-card">
-                            <h3>Strategic Value</h3>
-                            <div class="metric">
-                                <div>Innovation Acceleration:</div>
-                                <div class="metric-value" id="innovationDisplay"></div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Implementation Considerations</h3>
                             </div>
-                            <div class="metric">
-                                <div>Competitive Advantage:</div>
-                                <div class="metric-value" id="competitiveDisplay"></div>
+                            <div class="card-body">
+                                <div class="metric">
+                                    <div class="metric-label">Estimated Implementation Time:</div>
+                                    <div class="metric-value" id="implementationTimeDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Resource Requirements:</div>
+                                    <div class="metric-value" id="resourceRequirementsDisplay"></div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Integration Complexity:</div>
+                                    <div class="metric-value" id="integrationComplexityDisplay"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="value-card" style="margin-top: 20px;">
-                        <h3>ROI Analysis</h3>
-                        <div class="metric">
-                            <div>Estimated First Year ROI:</div>
-                            <div class="metric-value" id="firstYearROIDisplay"></div>
-                        </div>
-                        <div class="metric">
-                            <div>3-Year ROI:</div>
-                            <div class="metric-value" id="threeYearROIDisplay"></div>
-                        </div>
-                        <div class="metric">
-                            <div>Estimated Payback Period:</div>
-                            <div class="metric-value" id="paybackPeriodDisplay"></div>
+                    <!-- Visualization Tab -->
+                    <div id="visualizationTab" class="tab-content">
+                        <h3>Value Distribution</h3>
+                        <p>The chart below shows the relative distribution of value across different categories:</p>
+                        
+                        <div class="chart-container">
+                            <div class="chart-bar" id="efficiencyBar" style="left: 80px;">
+                                <div class="chart-value" id="efficiencyValue"></div>
+                                <div class="chart-label">Operational Efficiency</div>
+                            </div>
+                            <div class="chart-bar" id="revenueBar" style="left: 230px;">
+                                <div class="chart-value" id="revenueValue"></div>
+                                <div class="chart-label">Revenue Impact</div>
+                            </div>
+                            <div class="chart-bar" id="riskBar" style="left: 380px;">
+                                <div class="chart-value" id="riskValue"></div>
+                                <div class="chart-label">Risk Reduction</div>
+                            </div>
+                            <div class="chart-bar" id="strategicBar" style="left: 530px;">
+                                <div class="chart-value" id="strategicValue"></div>
+                                <div class="chart-label">Strategic Value</div>
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="button-row">
-                        <button id="backBtn" class="btn-secondary">Back to Form</button>
-                        <button id="exportBtn" class="btn-primary">Export Results</button>
+                        <button id="backToFormBtn" class="btn-secondary">
+                            <i class="fas fa-arrow-left btn-icon"></i>
+                            <span>Back to Form</span>
+                        </button>
+                        <button id="shareResultsBtn" class="btn-primary">
+                            <i class="fas fa-share-alt btn-icon"></i>
+                            <span>Share Results</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card" style="margin-top: 30px;">
-    <div class="card-header">
-        <h2>Privacy & Legal</h2>
-    </div>
-    <div class="card-body">
-        <div style="margin-bottom: 20px;">
-            <h3 style="font-size: 18px; color: #2563eb; margin-bottom: 10px;">Privacy Statement</h3>
-            <p>This calculator operates entirely within your web browser. No data entered into this calculator is collected, stored, or transmitted to RelationalAI or any third parties. All calculations are performed locally on your device, and all information disappears when you close this page.</p>
+        
+        <!-- Privacy and Legal Footer -->
+        <div class="legal-footer">
+            <div class="legal-section">
+                <h3>Privacy Statement</h3>
+                <p>This calculator operates entirely within your web browser. No data entered into this calculator is collected, stored, or transmitted to RelationalAI or any third parties. All calculations are performed locally on your device, and all information disappears when you close this page.</p>
+            </div>
+            
+            <div class="legal-section">
+                <h3>Disclaimer</h3>
+                <p>This calculator provides estimates based on industry benchmarks and typical outcomes from similar implementations. The results are for informational purposes only and should not be considered as guaranteed outcomes. Actual results may vary based on specific implementation details, industry conditions, and other factors.</p>
+                <p>The financial projections and return-on-investment calculations are estimates intended to illustrate potential value. RelationalAI recommends conducting a detailed assessment specific to your organization's needs and environment before making investment decisions.</p>
+            </div>
+            
+            <div class="legal-copyright">
+                © 2025 RelationalAI. All rights reserved.
+            </div>
         </div>
-        
-        <div>
-            <h3 style="font-size: 18px; color: #2563eb; margin-bottom: 10px;">Disclaimer</h3>
-            <p>This calculator provides estimates based on industry benchmarks and typical outcomes from similar implementations. The results are for informational purposes only and should not be considered as guaranteed outcomes. Actual results may vary based on specific implementation details, industry conditions, and other factors.</p>
-            <p>The financial projections and return-on-investment calculations are estimates intended to illustrate potential value. RelationalAI recommends conducting a detailed assessment specific to your organization's needs and environment before making investment decisions.</p>
-            <p style="margin-top: 10px; font-size: 14px;">© 2025 RelationalAI. All rights reserved.</p>
-        </div>
     </div>
-</div>
-    </div>
-  <script>
-    // DOM Elements
-    const calculateBtn = document.getElementById('calculateBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const backBtn = document.getElementById('backBtn');
-    const exportBtn = document.getElementById('exportBtn');
-    const inputForm = document.getElementById('inputForm');
-    const resultsContainer = document.getElementById('resultsContainer');
     
-    // Industry multipliers for calculations
-    const industryMultipliers = {
-        'financial': 1.2,
-        'healthcare': 1.15,
-        'retail': 0.95,
-        'manufacturing': 1.05,
-        'technology': 1.1,
-        'other': 1.0
-    };
-    
-    // Company size multipliers
-    const sizeMultipliers = {
-        'small': 0.8,
-        'medium': 1.0,
-        'large': 1.2,
-        'enterprise': 1.4
-    };
-    
-    // Use case impact factors
-    const useCaseImpact = {
-        'customerInsight': { revenue: 1.2, efficiency: 0.9, risk: 0.8 },
-        'fraudDetection': { revenue: 0.7, efficiency: 0.9, risk: 1.5 },
-        'supplyChain': { revenue: 0.9, efficiency: 1.3, risk: 0.9 },
-        'riskAnalysis': { revenue: 0.6, efficiency: 0.8, risk: 1.6 },
-        'productDevelopment': { revenue: 1.3, efficiency: 1.1, risk: 0.7 },
-        'other': { revenue: 1.0, efficiency: 1.0, risk: 1.0 }
-    };
-    
-    // Store calculation results
-    let calculationResults = {};
-    
-    // Helper function to format currency
-    function formatCurrency(value) {
-        return '$' + value.toLocaleString('en-US', { maximumFractionDigits: 0 });
-    }
-    
-    // Helper function to format percentage
-    function formatPercent(value) {
-        return value.toFixed(1) + '%';
-    }
-    
-    // Calculate business value
-    function calculateBusinessValue() {
-        // Get input values
-        const companyName = document.getElementById('companyName').value || 'Your Company';
-        const industry = document.getElementById('industry').value || 'other';
-        const companySize = document.getElementById('companySize').value || 'medium';
-        const currentSolution = document.getElementById('currentDataSolution').value;
-        const dataVolume = Number(document.getElementById('dataVolume').value) || 10;
-        const dataTeamSize = Number(document.getElementById('dataTeamSize').value) || 5;
-        const useCase = document.getElementById('useCase').value || 'other';
-        const devTime = Number(document.getElementById('devTime').value) || 12;
-        const annualRevenue = Number(document.getElementById('annualRevenue').value) || 100;
-        const dataQualityIssues = Number(document.getElementById('dataQualityIssues').value) || 20;
-        
-        // Base calculations
-        const industryMultiplier = industryMultipliers[industry];
-        const sizeMultiplier = sizeMultipliers[companySize];
-        const useCaseFactor = useCaseImpact[useCase];
-        
-        // Calculate operational efficiency savings
-        const avgSalary = 120000; // Assumed average salary for data professionals
-        const efficiencyGain = 0.25 * useCaseFactor.efficiency * industryMultiplier;
-        const costSavings = dataTeamSize * avgSalary * efficiencyGain;
-        
-        // Calculate development time reduction
-        const devTimeReduction = Math.min(75, 40 * useCaseFactor.efficiency * industryMultiplier);
-        
-        // Calculate revenue impact
-        const revenueIncrease = annualRevenue * 0.005 * useCaseFactor.revenue * sizeMultiplier * industryMultiplier;
-        const timeToValue = Math.max(60, 80 - (devTime * 5));
-        
-        // Calculate risk reduction
-        const dataQualityImprovement = Math.min(75, dataQualityIssues * 0.6 * useCaseFactor.risk);
-        const riskAvoidance = annualRevenue * 0.002 * useCaseFactor.risk * industryMultiplier;
-        
-        // Calculate strategic value
-        const innovationFactor = dataVolume * 0.02 * industryMultiplier;
-        const competitiveAdvantage = Math.min(36, 12 + (devTimeReduction / 2));
-        
-        // Calculate ROI
-        const estimatedAnnualCost = Math.min(annualRevenue * 0.005, 500000) * sizeMultiplier;
-        const firstYearBenefit = costSavings + revenueIncrease + riskAvoidance;
-        const firstYearROI = (firstYearBenefit / estimatedAnnualCost) * 100;
-        const threeYearROI = ((firstYearBenefit * 3.6) / (estimatedAnnualCost * 3)) * 100;
-        const paybackPeriod = estimatedAnnualCost / (firstYearBenefit / 12);
-        
-        // Calculate value over time
-        const year1Value = firstYearBenefit;
-        const year2Value = firstYearBenefit * 1.4;
-        const year3Value = firstYearBenefit * 2.2;
-        const totalValue = year1Value + year2Value + year3Value;
-        
-        // Store results
-        calculationResults = {
-            companyName,
-            industry,
-            companySize,
-            currentSolution,
-            dataVolume,
-            dataTeamSize,
-            useCase,
-            devTime,
-            annualRevenue,
-            dataQualityIssues,
-            costSavings,
-            devTimeReduction,
-            revenueIncrease,
-            timeToValue,
-            dataQualityImprovement,
-            riskAvoidance,
-            innovationFactor,
-            competitiveAdvantage,
-            firstYearROI,
-            threeYearROI,
-            paybackPeriod,
-            year1Value,
-            year2Value,
-            year3Value,
-            totalValue
-        };
-        
-        // Update the UI with calculated values
-        document.getElementById('companyNameDisplay').textContent = companyName;
-        document.getElementById('totalValueDisplay').textContent = formatCurrency(totalValue);
-        document.getElementById('costSavingsDisplay').textContent = formatCurrency(costSavings) + '/year';
-        document.getElementById('devTimeReductionDisplay').textContent = formatPercent(devTimeReduction) + ' faster';
-        document.getElementById('revenueIncreaseDisplay').textContent = formatCurrency(revenueIncrease) + '/year';
-        document.getElementById('timeToValueDisplay').textContent = formatPercent(timeToValue) + ' faster';
-        document.getElementById('dataQualityDisplay').textContent = formatPercent(dataQualityImprovement) + ' improvement';
-        document.getElementById('riskAvoidanceDisplay').textContent = formatCurrency(riskAvoidance) + '/year';
-        document.getElementById('innovationDisplay').textContent = Math.round(innovationFactor) + 'x faster model deployment';
-        document.getElementById('competitiveDisplay').textContent = Math.round(competitiveAdvantage) + ' month lead over competitors';
-        
-        // Update ROI information
-        document.getElementById('firstYearROIDisplay').textContent = formatPercent(firstYearROI);
-        document.getElementById('threeYearROIDisplay').textContent = formatPercent(threeYearROI);
-        document.getElementById('paybackPeriodDisplay').textContent = paybackPeriod.toFixed(1) + ' months';
-        
-        // Create summary text based on inputs
-        let summaryText = `Based on our analysis, ${companyName} could realize significant value by implementing RelationalAI`;
-        
-        if (currentSolution === 'snowflake') {
-            summaryText += ' alongside your existing Snowflake investment';
-        }
-        
-        let useCaseText = 'your selected use case';
-        if (useCase && useCase !== 'other') {
-            const useCaseSelect = document.getElementById('useCase');
-            const selectedOption = useCaseSelect.options[useCaseSelect.selectedIndex];
-            useCaseText = selectedOption.text;
-        }
-        
-        summaryText += `. With a focus on ${useCaseText}, you could potentially see a ${formatPercent(firstYearROI)} ROI in the first year, with benefits growing over time.`;
-        
-        document.getElementById('summaryText').textContent = summaryText;
-        
-        // Show results, hide form
-        inputForm.style.display = 'none';
-        resultsContainer.style.display = 'block';
-        
-        // Scroll to top to view results
-        window.scrollTo(0, 0);
-    }
-    
-    // Reset the form
-    function resetForm() {
-        document.getElementById('companyName').value = '';
-        document.getElementById('industry').value = '';
-        document.getElementById('companySize').value = '';
-        document.getElementById('currentDataSolution').value = '';
-        document.getElementById('dataVolume').value = '';
-        document.getElementById('dataTeamSize').value = '';
-        document.getElementById('useCase').value = '';
-        document.getElementById('devTime').value = '';
-        document.getElementById('annualRevenue').value = '';
-        document.getElementById('dataQualityIssues').value = '';
-    }
-    
-    // Export results as PDF (placeholder - in a real app this would generate a PDF)
-    function exportResults() {
-        alert('In a production version, this would export a PDF with the calculated results.\n\nFor now, you can take a screenshot or copy the results.');
-    }
-    
-    // Event listeners
-    calculateBtn.addEventListener('click', calculateBusinessValue);
-    resetBtn.addEventListener('click', resetForm);
-    backBtn.addEventListener('click', function() {
-        resultsContainer.style.display = 'none';
-        inputForm.style.display = 'block';
-    });
-    exportBtn.addEventListener('click', exportResults);
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
